@@ -58,3 +58,10 @@ Rules #3 and #4 talk about something called mutable data. Mutable data means the
 When your program has race conditions, it is almost _impossible_ to reproduce the bug in order to fix it.  is generally scares programmers away from writing multithreaded programs.
 
 One important thing about Clojure is that it inherently allows us to protects us from this  problem right out of the box. We'll explore this idea a bit more later. For now lets continue on to learning about the **[Bank Account Feature](Bank_Account_Feature.md)** we'll be implementing to learn about multithreaded programming in Clojure.
+
+
+## Copyright and License
+
+Copyright © 2015 Melissa Voegeli
+
+Licensed under the [MIT](http://opensource.org/licenses/MIT) [LICENSE](LICENSE)
