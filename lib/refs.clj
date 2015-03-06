@@ -1,41 +1,36 @@
-; Create two accounts with refs
-____
-____
+; HINT: The lines you need to change are 3,4,11,18, and 34
 
-(defn balance [acc] (:checking @acc))
-(defn check-and-withdraw [account val]
-    (let [known-balance (balance account)]
-        (Thread/sleep 1000)
-        (let [worked (if (<= val (:checking @account) )
-                              ; Alter the ref and return true at the end
-                              ____
-                              (do
-                                (println "Insufficient funds!")
-                                false))]
-             (println (str "Withdrawal Known Balance: " known-balance ", Current Balance: " (balance account)))
-             worked)))
-(defn show-and-deposit [account val]
-   (let [known-balance (balance account)]
-       (Thread/sleep 1000)
-       ; Alter the account and return the account at the end
-       (let [new-account ____]
-            (println (str "Deposit Known Balance: " known-balance ", Current Balance: " (balance new-account)))
-            new-account)))
+(def account-a-atom (atom {:checking 100}))
+(def account-b-atom (atom {:checking 100}))
 
-(defn withdraw [acc val]
-  (check-and-withdraw acc val))
+(defn balance [acc] (:checking acc))
+(defn withdraw [account val]
+    "withdraw from the account, return true when successful"
+    (if (<= val (:checking @account) )
+       (do
+         (swap! account assoc :checking (- (:checking @account) val))
+         true)
+       (do
+         (println "Insufficient funds!")
+         false)))
 
-(defn deposit [acc val]
-  (show-and-deposit acc val))
+(defn deposit [account val]
+    (swap! account assoc :checking (+ (:checking @account) val)))
 
 (defn transfer [from to val]
         (Thread/sleep 1000)
         (let [withdrawal-successful? (withdraw from val)]
           (if withdrawal-successful?
-             (do
-               (deposit to val)
-               (println (str "Transfer Successful. From Balance: " (balance from) ", To Balance: " (balance to))))
-             (println (str "Transfer Unsuccessful. From Balance: " (balance from) ", To Balance: " (balance to))))))
+              (do
+                (deposit to val)
+                (println (str "Transfer Successful. From Balance: " (balance @from) ", To Balance: " (balance @to))))
+              (println (str "Transfer Unsuccessful. From Balance: " (balance @from) ", To Balance: " (balance @to))))))
 
-; Create a thread that contains a transaction to transfer $1 from account a to account b
-____
+(defn loop-over
+    "Given an account, withdraw money however many times is specified"
+    [num-of-times amount-to-withdraw]
+      (doseq [i (range num-of-times)]
+        (do
+           (future (transfer account-a-atom account-b-atom amount-to-withdraw)))))
+
+(loop-over 10 60)
