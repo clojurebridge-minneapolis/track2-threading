@@ -1,3 +1,4 @@
+; HINT: line 2, 26, and 37
 (def my-account {:checking 5})
 
 (defn balance "Print out the balance of the account" [account-hash] (:checking account-hash))
