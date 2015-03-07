@@ -1,3 +1,4 @@
+; HINT: line 2, 26, and 37
 (def my-account {:checking 5})
 
 (defn balance "Print out the balance of the account" [account-hash] (:checking account-hash))
@@ -33,7 +34,7 @@
                (print-balances known-balance account-changes)
                account-changes)))
 
-(defn send-values "Calls sleep-withdraw-print on an account atom using swap" [] (sleep-withdraw-print my-account 1))
+(defn swap-values "Calls sleep-withdraw-print on an account atom using swap" [] (sleep-withdraw-print my-account 1))
 
 (defn loop-over
      "Given an account, withdraw money however many times is specified"
