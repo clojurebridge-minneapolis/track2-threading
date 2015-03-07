@@ -34,14 +34,14 @@
                (print-balances known-balance account-changes)
                account-changes)))
 
-(defn swap-values "Calls sleep-withdraw-print on an account atom using swap" [] (sleep-withdraw-print my-account 1))
+(defn send-values "Calls sleep-withdraw-print on an account atom using swap" [] (sleep-withdraw-print my-account 1))
 
 (defn loop-over
      "Given an account, withdraw money however many times is specified"
      [account num-of-times amount-to-withdraw]
        (doseq [i (range num-of-times)]
          (do
-            (swap-values)
+            (send-values)
             (println "Tried to withdraw $1"))))
 
 
