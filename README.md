@@ -1,3 +1,7 @@
+# track2-threading
+
+**NOTE:** Pointers to our latest version of the curriculum can be found in the [installfest](https://github.com/clojurebridge-minneapolis/installfest) repo!
+
 ## Overview Threading in Clojure
 
 ### Abstract
